@@ -1,5 +1,6 @@
 # Our project-specific .gitignore items
 *.tsv
+*.csv
 
 ## From GitHub's Python .gitignore template
 # Byte-compiled / optimized / DLL files
