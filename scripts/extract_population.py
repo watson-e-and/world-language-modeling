@@ -35,19 +35,11 @@ def populations(txt):
                 total = int(parse)
         i = i + 1
     return (total, l1, l2)
-# print(len(txt))
-# fi = open('./data/25eng.txt', 'r')
-# for line in fi:
-#     [country, txt] = line.split("\t")
-#     print(country, "===============================")
-#     print(populations(txt))
     
-
  
 def main():
     editions = ['16','17','18','19','20','21','22','23','25']
     languages = ['eng', 'fra','hin','ind','jpn','pcm','por','rus','spa','urd','arz','ben','cmn','deu']
-    output_fi = open('populations.tsv', 'a')
     
     language_dict = {}
     for language in languages:
@@ -61,20 +53,17 @@ def main():
                 else:
                     language_dict[language][country] = [0]*len(editions)
                     language_dict[language][country][i] = populations(txt)
-                # line_to_write = line_to_write + f'\t{country}\t{populations(txt)}'
-                # print(line_to_write)
-            # quit()
-            # output_fi.write(line_to_write + '\n')
             fi.close()
-    output_fi.close()
-    for l in language_dict.keys():
-        print(l)
-    # print(language_dict)
-    # for filename in glob.glob(os.path.join(path, '*.txt')):
-    #     print(filename)
-    #     with open(os.path.join(os.getcwd(), filename), 'r') as fi: # open in readonly mode
-    #         print(fi.read())
             
+    output_fi = open('populations.tsv', 'a')
+    for lang in language_dict.keys():
+        for cntry in language_dict[lang]:
+            li = f'{lang}\t{cntry}\t'
+            for j in language_dict[lang][cntry]:
+                li = li + f'{j}\t'
+            li = li + "\n"
+            output_fi.write(li)
+    output_fi.close()
     return    
 if __name__ == "__main__":
     main()
